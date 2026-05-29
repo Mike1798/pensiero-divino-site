@@ -9,6 +9,18 @@ function loadMap(btn) {
   placeholder.parentNode.replaceChild(iframe, placeholder);
 }
 
+// Voce attiva nella navbar (desktop + mobile)
+(function () {
+  const path = window.location.pathname;
+  document.querySelectorAll('.navbar nav a, .mobile-nav nav a').forEach(link => {
+    const href = link.getAttribute('href');
+    const isHome = href === 'index.html' && (path === '/' || path.endsWith('/index.html') || path.endsWith('/'));
+    const isMenu = href === 'menu/index.html' && path.includes('/menu');
+    const isMatch = path.endsWith('/' + href);
+    if (isHome || isMenu || isMatch) link.classList.add('active');
+  });
+})();
+
 // Smooth scroll personalizzato — più fluido del browser nativo
 function smoothScrollTo(targetY, duration) {
   const startY = window.scrollY;
