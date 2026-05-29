@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pensiero Divino — Menù | Firenze</title>
+<meta name="description" content="Menù digitale di Pensiero Divino — vinaio a Firenze."/>
+<meta name="theme-color" content="#6b1c1c"/>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pensiero Divino">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Menù • Pensiero Divino | Firenze">
+<meta property="og:description" content="Scopri il menù di Pensiero Divino — taglieri, schiacciate, calici e apericena. Enoteca a Firenze.">
+<meta property="og:url" content="https://www.pensierodivino.com/menu/">
+<meta property="og:image" content="https://www.pensierodivino.com/assets/carousel1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Menù • Pensiero Divino | Firenze">
+<meta name="twitter:description" content="Scopri il menù di Pensiero Divino — taglieri, schiacciate, calici e apericena. Enoteca a Firenze.">
+<meta name="twitter:image" content="https://www.pensierodivino.com/assets/carousel1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f5f0e6;--ink:#1a1410;--ink-soft:#7a6a5a;
+  --wine:#6b1c1c;--gold:#b8933a;--gold-light:#d4aa55;
+  --gold-line:rgba(184,147,58,0.22);--border:rgba(26,20,16,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.7;}
+
+/* ── FLOATING MENU ── */
+.floating-menu{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:250;
+  transition:opacity .3s ease, transform .3s ease;
+}
+
+.floating-menu.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-12px);
+}
+
+.menu-toggle{
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:rgba(245,240,230,0.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+  transition:all .25s ease;
+  box-shadow:0 2px 16px rgba(107,28,28,0.15), 0 0 0 1px rgba(184,147,58,0.22);
+}
+
+.menu-toggle:hover{
+  background:rgba(245,240,230,1);
+  box-shadow:0 4px 20px rgba(107,28,28,0.20), 0 0 0 1px rgba(184,147,58,0.38);
+}
+
+.menu-toggle span{
+  width:16px;
+  height:1px;
+  background:var(--ink);
+  opacity:0.75;
+}
+
+.menu-dropdown{
+  position:absolute;
+  top:56px;
+  right:0;
+  width:220px;
+  padding:10px 8px;
+  border-radius:4px;
+  background:rgba(248,243,234,0.97);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(184,147,58,0.20);
+  box-shadow:0 12px 40px rgba(26,20,16,0.12), 0 2px 8px rgba(26,20,16,0.06);
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-8px);
+  transition:all .3s cubic-bezier(0.22,1,0.36,1);
+}
+
+.menu-dropdown.open{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+.menu-dropdown a{
+  font-family:'Cormorant Garamond',serif;
+  text-decoration:none;
+  color:var(--ink);
+  font-size:1.1rem;
+  font-weight:400;
+  letter-spacing:.03em;
+  padding:12px 18px;
+  border-bottom:1px solid rgba(184,147,58,0.12);
+  transition:all .2s ease;
+  display:block;
+}
+
+.menu-dropdown a:last-child{
+  border-bottom:none;
+}
+
+.menu-dropdown a:hover{
+  color:var(--wine);
+  padding-left:24px;
+}
+
+/* ── HERO ── */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px 80px;text-align:center;position:relative;overflow:hidden;background:#1a0505;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 55% at 50% 0%,rgba(107,28,28,0.35),transparent 65%),radial-gradient(ellipse 70% 40% at 50% 110%,rgba(184,147,58,0.08),transparent 55%);pointer-events:none;}
+.hero .hero-loc{color:rgba(242,232,220,0.55);}
+.corner{position:absolute;width:48px;height:48px;opacity:.18;}
+.corner.tl{top:20px;left:20px;border-top:1px solid var(--gold);border-left:1px solid var(--gold);}
+.corner.tr{top:20px;right:20px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);}
+.corner.bl{bottom:64px;left:20px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold);}
+.corner.br{bottom:64px;right:20px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold);}
+
+.hero-wordmark{margin:0 auto 8px;opacity:0;animation:up .9s .2s forwards;}
+.hero-wordmark img{width:260px;max-width:72vw;display:block;margin:0 auto;}
+.hero-logo img{width:100%;height:100%;object-fit:contain;padding:10px;}
+.eyebrow{font-size:.63rem;font-weight:400;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;opacity:0;animation:up .9s .35s forwards;margin-bottom:14px;}
+.hero-div{display:flex;align-items:center;gap:12px;width:150px;margin:0 auto 16px;opacity:0;animation:up .9s .4s forwards;}
+.hero-div::before,.hero-div::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.35;}
+.hero-div span{color:var(--gold);font-size:.8rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,13vw,4.4rem);font-weight:400;letter-spacing:-.01em;line-height:1.05;opacity:0;animation:up .9s .5s forwards;}
+.hero-title em{font-style:italic;color:var(--wine);}
+.hero-loc{font-size:.62rem;letter-spacing:.28em;color:var(--ink-soft);text-transform:uppercase;margin-top:10px;opacity:0;animation:up .9s .6s forwards;}
+.hero-quote{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.9rem;color:var(--gold);line-height:1.65;margin:22px auto 0;max-width:260px;opacity:0;animation:up .9s .7s forwards;}
+
+/* Lang switch — discreto in basso a destra */
+.lang-switch{position:fixed;bottom:20px;right:20px;z-index:200;display:flex;gap:4px;opacity:0;animation:up .9s 1s forwards;}
+.lang-switch button{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.12em;padding:6px 12px;border:1px solid var(--gold-line);cursor:pointer;background:rgba(245,240,230,.9);backdrop-filter:blur(10px);color:var(--ink-soft);transition:all .2s;}
+.lang-switch button.active{background:var(--wine);color:var(--cream);border-color:var(--wine);}
+.lang-switch button:hover:not(.active){background:var(--cream-dark,#ede5d0);color:var(--ink);}
+
+.scroll-cta{position:absolute;bottom:32px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:up .9s 1.1s forwards;}
+.scroll-cta span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;letter-spacing:.12em;color:var(--gold);text-align:center;font-weight:300;}
+.scroll-line{display:flex;flex-direction:column;align-items:center;gap:0;}
+.scroll-line::before,.scroll-line::after{content:'';display:block;width:1px;height:20px;background:linear-gradient(to bottom,var(--gold-light),transparent);}
+.scroll-line::before{animation:drip 2s ease-in-out 1.8s infinite;}
+.scroll-line::after{animation:drip 2s ease-in-out 2.2s infinite;opacity:.5;}
+@keyframes drip{0%{transform:scaleY(0) translateY(-10px);opacity:0;}40%{transform:scaleY(1) translateY(0);opacity:1;}100%{transform:scaleY(1) translateY(8px);opacity:0;}}
+
+/* ── NAV ── */
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(245,240,230,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--gold-line);}
+.nav-inner{display:flex;max-width:480px;margin:0 auto;}
+.nav-inner a{flex:1;text-align:center;font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);padding:13px 8px 11px;border-right:1px solid var(--gold-line);transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.nav-inner a:last-child{border-right:none;}
+.nav-inner a svg{width:17px;height:17px;opacity:.55;transition:opacity .2s;stroke:currentColor;}
+.nav-inner a:hover,.nav-inner a.active{color:var(--wine);}
+.nav-inner a:hover svg,.nav-inner a.active svg{opacity:1;}
+.nav-inner a.active{border-bottom:2px solid var(--wine);}
+
+/* ── SECTIONS ── */
+.section{padding:56px 24px 24px;max-width:480px;margin:0 auto;}
+.sec-head{text-align:center;margin-bottom:36px;}
+.sec-tag{display:block;font-size:.6rem;font-weight:400;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;letter-spacing:-.02em;line-height:1;}
+.sec-title em{font-style:italic;color:var(--wine);}
+.sec-rule{display:flex;align-items:center;gap:10px;margin:18px auto 0;width:120px;}
+.sec-rule::before,.sec-rule::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.4;}
+.sec-rule span{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.7;flex-shrink:0;}
+
+.sub-cat{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.15rem;
+  font-weight:300;
+  font-style:italic;
+  letter-spacing:-.01em;
+  color:var(--wine);
+  text-transform:none;
+  text-align:center;
+  padding:54px 0 18px;
+  border-top:1px solid var(--border);
+  margin-top:26px;
+  line-height:1;
+}
+.sub-cat-first{
+  border-top:none;
+  padding-top:18px;
+}
+
+/* Wine format */
+.wine-format{border:1px solid var(--gold-line);padding:18px 24px;margin-bottom:28px;display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;}
+.wf-label{font-size:.6rem;letter-spacing:.22em;color:var(--ink-soft);text-transform:uppercase;text-align:center;display:block;margin-bottom:6px;}
+.wf-price{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--wine);text-align:center;display:block;}
+.wf-sep{width:1px;height:40px;background:var(--gold-line);}
+
+/* ── MENU ITEMS ── */
+.item{border-top:1px solid var(--border);padding:20px 0;}
+.item:last-child{border-bottom:1px solid var(--border);}
+.item-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.item-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;letter-spacing:-.01em;color:var(--ink);}
+.item-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--wine);white-space:nowrap;flex-shrink:0;}
+.item-abv{font-size:.68rem;letter-spacing:.1em;color:var(--gold);white-space:nowrap;flex-shrink:0;}
+.item-desc{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.82rem;color:var(--ink-soft);line-height:1.65;margin-top:7px;border-left:2px solid var(--gold-line);padding-left:12px;}
+.item-badge{display:inline-block;margin-top:10px;font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,147,58,.4);padding:3px 10px;}
+
+/* Allergeni inline */
+.allergen-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.ap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;
+  height:30px;
+  background:rgba(26,20,16,0.04);
+  border:1px solid rgba(184,147,58,0.18);
+  border-radius:50%;
+  padding:0;
+  flex-shrink:0;
+}
+
+.ap span:first-child{
+  font-size:1rem;
+  line-height:1;
+}
+/* ── ALLERGENI SECTION ── */
+.allerg-note{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.8rem;color:var(--ink-soft);text-align:center;margin-bottom:24px;line-height:1.6;}
+.allerg-item{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-top:1px solid var(--border);}
+.allerg-item:last-child{border-bottom:1px solid var(--border);}
+.allerg-icon{font-size:1.25rem;width:28px;text-align:center;flex-shrink:0;margin-top:1px;}
+.allerg-name{font-size:.9rem;font-weight:500;color:var(--ink);}
+.allerg-desc{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.78rem;color:var(--ink-soft);margin-top:2px;}
+
+/* ── FOOTER ── */
+.footer{background:#3a0808;padding:48px 24px 44px;text-align:center;margin-top:40px;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.9rem;font-weight:300;color:rgba(245,240,230,.88);letter-spacing:.05em;}
+.footer-sub{font-size:.6rem;letter-spacing:.3em;color:rgba(184,147,58,.75);text-transform:uppercase;margin-top:4px;}
+.footer-rule{display:flex;align-items:center;gap:10px;margin:20px auto;width:100px;}
+.footer-rule::before,.footer-rule::after{content:'';flex:1;height:1px;background:rgba(184,147,58,.35);}
+.footer-rule span{width:4px;height:4px;border-radius:50%;background:rgba(184,147,58,.55);flex-shrink:0;}
+.footer-note{font-size:.78rem;color:rgba(245,240,230,.5);line-height:1.6;}
+.footer-ig{display:inline-block;margin-top:16px;font-size:.68rem;letter-spacing:.15em;color:rgba(184,147,58,.65);text-transform:uppercase;text-decoration:none;}
+
+/* ── ANIMATIONS ── */
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* i18n */
+[data-en]{display:none;}
+body.en [data-it]{display:none;}
+body.en [data-en]{display:revert;}
+  .footer-ig,
+.footer-site {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 2px;
+  transition: opacity 0.3s ease;
+}
+
+.footer-ig:hover,
+.footer-site:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+
+<body class="it">
+
+<!-- FLOATING MENU -->
+<div class="floating-menu">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="menu-dropdown" id="menuDropdown">
+    <a href="../index.html">Home</a>
+    <a href="../chi-siamo.html">Chi siamo</a>
+    <a href="../vini.html">Vini</a>
+    <a href="../contatti.html">Contatti</a>
+    <a href="../menu/index.html">Menù</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="hero-wordmark">
+    <img src="../assets/WHITE_CENTER.png" alt="Pensiero Divino">
+  </div>
+
+  <div class="hero-div"><span>✦</span></div>
+
+  <div class="hero-loc">Firenze</div>
+
+  <p class="hero-quote" data-it>"Un pasto senza vino si chiama colazione"</p>
+  <p class="hero-quote" data-en>"A meal without wine is called breakfast"</p>
+
+  <div class="scroll-cta">
+    <span data-it>Scorri per il menù</span>
+    <span data-en>Scroll for the menu</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Lang switch fisso -->
+<div class="lang-switch">
+  <button id="btn-it" class="active" onclick="setLang('it')">IT</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <a href="#food" class="nav-link">
+      <!-- piatto / plate icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M8 12a4 4 0 0 1 8 0"/>
+        <line x1="12" y1="8" x2="12" y2="8.5"/>
+      </svg>
+      <span data-it>Food</span><span data-en>Food</span>
+    </a>
+    <a href="#vino" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 22h8M12 11v11M5 3h14l-2 7a5 5 0 01-10 0L5 3z"/>
+      </svg>
+      <span data-it>Vino</span><span data-en>Wine</span>
+    </a>
+    <a href="#drink" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 22h8M9 3h6l3 7H6l3-7zM6 10c0 3.314 2.686 6 6 6s6-2.686 6-6"/>
+      </svg>
+      <span data-it>Drink</span><span data-en>Drinks</span>
+    </a>
+  </div>
+</nav>
+
+<!-- FOOD -->
+<section class="section reveal" id="food">
+  <div class="sec-head">
+    <span class="sec-tag">01 — Food</span>
+    <h2 class="sec-title"><span data-it><em>Schiacciate</em></span><span data-en><em>Flatbreads</em></span></h2>
+    <div class="sec-rule"><span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Levante</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Crudo, crema di cipolle, pecorino</div>
+    <div class="item-desc" data-en>Cured ham, onion cream, pecorino</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Libero</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Mortadella con pistacchi, stracciatella</div>
+    <div class="item-desc" data-en>Mortadella with pistachios, stracciatella</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span><span class="ap"><span>🌰</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Selvaggia</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Sbriciolona, pomodori secchi, crema di rucola</div>
+    <div class="item-desc" data-en>Crumbled sausage, sun-dried tomatoes, rocket cream</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">La Gino</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Lardo, brie, miele</div>
+    <div class="item-desc" data-en>Lard, brie, honey</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">La Caterina</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Cotto, brie, miele, noci, rucola</div>
+    <div class="item-desc" data-en>Cooked ham, brie, honey, walnuts, rocket</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span><span class="ap"><span>🌰</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Osvaldo</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Sbriciolona, cipolla caramellata, pecorino e miele</div>
+    <div class="item-desc" data-en>Crumbled sausage, caramelised onion, pecorino and honey</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Contadina</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Pecorino, miele, noci e rucola</div>
+    <div class="item-desc" data-en>Pecorino, honey, walnuts and rocket</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span><span class="ap"><span>🌰</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Fresca</div><div class="item-price">€7</div></div>
+    <div class="item-desc" data-it>Stracciatella, pomodoro e insalata</div>
+    <div class="item-desc" data-en>Stracciatella, tomato and salad</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Nutellona</div><div class="item-price">€5</div></div>
+    <div class="item-desc">Nutella</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span><span class="ap"><span>🌰</span></span></div>
+  </div>
+
+  <!-- TAGLIERI -->
+  <div class="sub-cat sub-cat-first" style="margin-top:32px;">
+    <span data-it>Taglieri</span><span data-en>Boards</span>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row">
+      <div class="item-name"><span data-it>Tagliere Singolo</span><span data-en>Single Board</span></div>
+      <div class="item-price">€8</div>
+    </div>
+    <div class="item-desc" data-it>Affettati, Formaggi e schiacciata</div>
+    <div class="item-desc" data-en>Cured meats, Cheeses and flatbread</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row">
+      <div class="item-name"><span data-it>Tagliere Doppio</span><span data-en>Double Board</span></div>
+      <div class="item-price">€15</div>
+    </div>
+    <div class="item-desc" data-it>Affettati, Formaggi e schiacciata</div>
+    <div class="item-desc" data-en>Cured meats, Cheeses and flatbread</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row">
+      <div class="item-name"><span data-it>Tagliere Grande</span><span data-en>Large Board</span></div>
+      <div class="item-price">€30</div>
+    </div>
+    <div class="item-desc" data-it>Affettati, Formaggi e schiacciata</div>
+    <div class="item-desc" data-en>Cured meats, Cheeses and flatbread</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+
+  <div class="item reveal">
+    <div class="item-row">
+      <div class="item-name"><span data-it>Tagliere Crostini Misti</span><span data-en>Mixed Crostini Board</span></div>
+      <div class="item-price">€8</div>
+    </div>
+    <div class="item-desc" data-it>Schiacciata con varie creme e lardo</div>
+    <div class="item-desc" data-en>Flatbread with various creams and lard</div>
+    <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
+  </div>
+</section>
+
+<!-- VINO -->
+<section class="section reveal" id="vino">
+  <div class="sec-head">
+    <span class="sec-tag">02 — <span data-it>Cantina</span><span data-en>Cellar</span></span>
+    <h2 class="sec-title"><em><span data-it>Vino</span><span data-en>Wine</span></em></h2>
+    <div class="sec-rule"><span></span></div>
+  </div>
+
+  <div class="wine-format">
+    <div><span class="wf-label"><span data-it>Calice</span><span data-en>Glass</span></span><span class="wf-price">4€</span></div>
+    <div class="wf-sep"></div>
+    <div><span class="wf-label"><span data-it>Bottiglia</span><span data-en>Bottle</span></span><span class="wf-price">15€</span></div>
+  </div>
+
+  <div class="sub-cat sub-cat-first"><span data-it>Vini Rossi</span><span data-en>Red Wines</span></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Merlot</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Merlot di Montalcino, morbido e rotondo, con frutto maturo ed equilibrio.</div><div class="item-desc" data-en>Montalcino Merlot, soft and round, with ripe fruit and balance.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Syrah</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Syrah di Cortona, intenso e speziato, con note di pepe e frutto scuro.</div><div class="item-desc" data-en>Cortona Syrah, intense and spiced, with pepper and dark fruit notes.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Governato</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Sangiovese di Castellina in Chianti, con note di ciliegia, morbido e ottima bevibilità.</div><div class="item-desc" data-en>Chianti Sangiovese, cherry notes, soft and very drinkable.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Barricato</div><div class="item-abv">14% vol</div></div><div class="item-desc" data-it>Sangiovese di Castellina in Chianti affinato in legno, più strutturato.</div><div class="item-desc" data-en>Oak-aged Chianti Sangiovese, more structured, with spice notes.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">San Donato</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>80% Sangiovese 20% Merlot, equilibrato e morbido, note di frutto rosso.</div><div class="item-desc" data-en>80% Sangiovese 20% Merlot, balanced, soft with red fruit notes.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Bolghereto</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Rosso toscano di Bolgheri, base Cabernet. Elegante e morbido.</div><div class="item-desc" data-en>Bolgheri Cabernet-based Tuscan red. Elegant and smooth.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Rossalcino</div><div class="item-abv">14% vol</div></div><div class="item-desc" data-it>Rosso di Montalcino, Sangiovese in purezza, più strutturato e intenso.</div><div class="item-desc" data-en>Montalcino Sangiovese, structured and intense.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Montecucco</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Affinamento in barrique, molto strutturato, con frutto scuro e buona persistenza.</div><div class="item-desc" data-en>Barrique-aged, very structured, dark fruit and long finish.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Montepulciano</div><div class="item-abv">14% vol</div></div><div class="item-desc" data-it>Affinamento in barrique, molto strutturato, con frutto scuro e buona persistenza.</div><div class="item-desc" data-en>Barrique-aged, very structured, dark fruit and long finish.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Pinot Nero</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Friuli (Udine), elegante e poco tannico, fine e leggero.</div><div class="item-desc" data-en>Friuli Pinot Noir, elegant, low tannin, fine and light.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Verona</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Rosso veneto della zona Valpolicella, morbido e fruttato.</div><div class="item-desc" data-en>Valpolicella Veneto red, soft and fruity.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Barbera</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Vino piemontese, poco tannico, morbido e rotondo.</div><div class="item-desc" data-en>Piedmontese wine, low tannin, soft and round.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Nebbiolo</div><div class="item-abv">14% vol</div></div><div class="item-desc" data-it>Vino piemontese, con tannino importante, elegante e strutturato.</div><div class="item-desc" data-en>Piedmontese Nebbiolo, firm tannin, elegant and structured.</div></div>
+
+  <div class="sub-cat"><span data-it>Vini Bianchi</span><span data-en>White Wines</span></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Vermentino</div><div class="item-abv">12.5% vol</div></div><div class="item-desc" data-it>Bianco toscano di Bolgheri, fresco e sapido, note agrumate ed erbacee.</div><div class="item-desc" data-en>Bolgheri Tuscan white, fresh and savory, citrus and herbal notes.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Passerina</div><div class="item-abv">12.5% vol</div></div><div class="item-desc" data-it>Dalle Marche, più fruttato e morbido, sentori di pesca e agrumi.</div><div class="item-desc" data-en>From Marche, fruity and soft, peach and citrus hints.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Pecorino</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Dalle Marche, secco e strutturato, con buone note minerali.</div><div class="item-desc" data-en>From Marche, dry and structured with mineral notes.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Soave</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Veneto, elegante e delicato, finale leggermente mandorlato.</div><div class="item-desc" data-en>Veneto Soave, elegant and delicate, slightly almond finish.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Sauvignon</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Friuli, fresco e aromatico, note di agrumi, erbe e frutta esotica.</div><div class="item-desc" data-en>Friuli Sauvignon, fresh and aromatic, citrus, herbs and exotic fruit.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Ribolla Gialla</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Friuli, fresca e vivace, note minerali e aromatiche.</div><div class="item-desc" data-en>Friuli Ribolla Gialla, fresh and lively, mineral and aromatic.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Pinot Grigio</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Friuli, color ramato, leggero e diretto, profumi delicati.</div><div class="item-desc" data-en>Friuli Pinot Grigio, copper-hued, light and direct, delicate aromas.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Traminer</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Dal Friuli, molto aromatico, note di rosa, spezie e frutta esotica.</div><div class="item-desc" data-en>Friuli Traminer, highly aromatic, rose, spice and exotic fruit.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Falanghina</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dalla provincia di Benevento, profumata e fresca, note floreali.</div><div class="item-desc" data-en>Benevento Falanghina, fragrant and fresh, floral notes.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Chardonnay</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Friuli, morbido e rotondo, versatile e facile da bere.</div><div class="item-desc" data-en>Friuli Chardonnay, soft and round, versatile and easy drinking.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Friulano</div><div class="item-abv">13% vol</div></div><div class="item-desc" data-it>Dal Friuli, strutturato, secco ed elegante.</div><div class="item-desc" data-en>Friulano, structured, dry and elegant.</div></div>
+
+  <div class="sub-cat"><span data-it>Vini Rosé</span><span data-en>Rosé Wines</span></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Rosato</div><div class="item-abv">13.5% vol</div></div><div class="item-desc" data-it>Sangiovese di Castellina in Chianti, fresco e fruttato, leggero.</div><div class="item-desc" data-en>Chianti Sangiovese rosé, fresh, fruity and light.</div></div>
+
+  <div class="sub-cat"><span data-it>Vini Frizzanti</span><span data-en>Sparkling Wines</span></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Glera</div><div class="item-abv">11% vol</div></div><div class="item-desc" data-it>Bollicina fresca dal Veneto, note fruttate e floreali. Perfetta da aperitivo.</div><div class="item-desc" data-en>Fresh Veneto sparkling, fruity and floral notes. Perfect as aperitivo.</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Raboso</div><div class="item-abv">11% vol</div></div><div class="item-desc" data-it>Rosato frizzante dal Veneto, fresco e fruttato.</div><div class="item-desc" data-en>Veneto sparkling rosé, fresh and fruity.</div></div>
+</section>
+
+<!-- DRINK -->
+<section class="section reveal" id="drink">
+  <div class="sec-head">
+    <span class="sec-tag">03 — Bar</span>
+    <h2 class="sec-title"><em>Drink</em></h2>
+    <div class="sec-rule"><span></span></div>
+  </div>
+
+  <div class="item reveal"><div class="item-row"><div class="item-name">Spritz</div><div class="item-price">€6</div></div><div class="item-desc">Aperol / Campari · Prosecco · Soda</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Hugo Spritz</div><div class="item-price">€6</div></div><div class="item-desc"><span data-it>Sciroppo di Sambuco · Prosecco · Soda</span><span data-en>Elderflower syrup · Prosecco · Soda</span></div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Cocktail Gin</div><div class="item-price">€6</div></div><div class="item-desc">Gin · Tonica / Lemon soda</div></div>
+  <div class="item reveal">
+    <div class="item-row"><div class="item-name">Cocktail Gin Premium</div><div class="item-price">€8</div></div>
+    <div class="item-desc">Gin Premium · Tonica / Soda</div>
+    <div class="item-badge">Premium</div>
+  </div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Cocktail Vodka</div><div class="item-price">€6</div></div><div class="item-desc">Vodka · Tonica / Lemon soda</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Moscow Mule</div><div class="item-price">€6</div></div><div class="item-desc">Lime · Vodka · Ginger Beer</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">London Mule</div><div class="item-price">€6</div></div><div class="item-desc">Lime · Gin · Ginger Beer</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Americano</div><div class="item-price">€6</div></div><div class="item-desc">Campari · Vermut · Soda</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Negroni</div><div class="item-price">€6</div></div><div class="item-desc">Campari · Vermut · Gin</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Sbagliato</div><div class="item-price">€6</div></div><div class="item-desc">Campari · Vermut · Prosecco</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Mojito</div><div class="item-price">€8</div></div><div class="item-desc"><span data-it>Lime · Zucchero di canna · Menta · Rum · Soda</span><span data-en>Lime · Cane sugar · Mint · Rum · Soda</span></div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Passion Mojito</div><div class="item-price">€8</div></div><div class="item-desc">Lime · <span data-it>Zucchero di canna</span><span data-en>Cane sugar</span> · Passion Fruit · Rum · Soda</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Mango Mojito</div><div class="item-price">€8</div></div><div class="item-desc">Lime · <span data-it>Zucchero di canna</span><span data-en>Cane sugar</span> · Mango · Rum · Soda</div></div>
+
+  <div class="sub-cat"><span data-it>Analcolici</span><span data-en>Non-alcoholic</span></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name"><span data-it>Cocktail Analcolico</span><span data-en>Mocktail</span></div><div class="item-price">€5</div></div><div class="item-desc">Lime · <span data-it>Sciroppo alla Fragola · Succo d'arancia</span><span data-en>Strawberry syrup · Orange juice</span></div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Virgin Mojito</div><div class="item-price">€6</div></div><div class="item-desc">Lime · <span data-it>Zucchero di canna · Menta · Soda</span><span data-en>Cane sugar · Mint · Soda</span></div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Crodino</div><div class="item-price">€4</div></div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Coca Cola</div><div class="item-price">€2,50</div></div><div class="item-desc">Normale / Zero</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Esta Thè</div><div class="item-price">€1,50</div></div><div class="item-desc"><span data-it>Limone / Pesca</span><span data-en>Lemon / Peach</span></div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name"><span data-it>Acqua 0,50cl</span><span data-en>Water 0,50cl</span></div><div class="item-price">€1</div></div><div class="item-desc"><span data-it>Gassata / Naturale</span><span data-en>Sparkling / Still</span></div></div>
+</section>
+
+<!-- ALLERGENI -->
+<section class="section reveal" id="allergeni">
+  <div class="sec-head">
+    <span class="sec-tag"><span data-it>Informazioni</span><span data-en>Information</span></span>
+    <h2 class="sec-title"><span data-it>Aller<em>geni</em></span><span data-en>Aller<em>gens</em></span></h2>
+    <div class="sec-rule"><span></span></div>
+  </div>
+  <p class="allerg-note" data-it>Elenco dei 14 allergeni secondo la normativa europea (Reg. UE 1169/2011). Per maggiori informazioni chiedere al personale.</p>
+  <p class="allerg-note" data-en>List of 14 allergens according to EU regulation (Reg. EU 1169/2011). For more information please ask our staff.</p>
+
+  <div class="allerg-item reveal"><div class="allerg-icon">🌾</div><div><div class="allerg-name"><span data-it>Glutine</span><span data-en>Gluten</span></div><div class="allerg-desc" data-it>Cereali contenenti  e derivati.</div><div class="allerg-desc" data-en>Cereals containing gluten and derivatives.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🥛</div><div><div class="allerg-name"><span data-it>Latte</span><span data-en>Milk</span></div><div class="allerg-desc" data-it> e prodotti derivati, incluso il lattosio.</div><div class="allerg-desc" data-en>Milk and dairy products, including lactose.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🥚</div><div><div class="allerg-name"><span data-it>Uova</span><span data-en>Eggs</span></div><div class="allerg-desc" data-it> e prodotti a base di .</div><div class="allerg-desc" data-en>Eggs and egg-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🐟</div><div><div class="allerg-name"><span data-it>Pesce</span><span data-en>Fish</span></div><div class="allerg-desc" data-it> e prodotti derivati.</div><div class="allerg-desc" data-en>Fish and fish derivatives.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🦐</div><div><div class="allerg-name"><span data-it>Crostacei</span><span data-en>Crustaceans</span></div><div class="allerg-desc" data-it>Crostacei e prodotti a base di crostacei.</div><div class="allerg-desc" data-en>Crustaceans and crustacean-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🐚</div><div><div class="allerg-name"><span data-it>Molluschi</span><span data-en>Molluscs</span></div><div class="allerg-desc" data-it>Molluschi e prodotti a base di molluschi.</div><div class="allerg-desc" data-en>Molluscs and mollusc-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🥜</div><div><div class="allerg-name"><span data-it>Arachidi</span><span data-en>Peanuts</span></div><div class="allerg-desc" data-it>Arachidi e prodotti a base di arachidi.</div><div class="allerg-desc" data-en>Peanuts and peanut-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🌰</div><div><div class="allerg-name"><span data-it>Frutta a guscio</span><span data-en>Tree nuts</span></div><div class="allerg-desc" data-it>Mandorle, nocciole, noci, pistacchi e derivati.</div><div class="allerg-desc" data-en>Almonds, hazelnuts, walnuts, pistachios and derivatives.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🫘</div><div><div class="allerg-name"><span data-it>Soia</span><span data-en>Soya</span></div><div class="allerg-desc" data-it>Soia e prodotti a base di soia.</div><div class="allerg-desc" data-en>Soya and soya-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🌿</div><div><div class="allerg-name"><span data-it>Sedano</span><span data-en>Celery</span></div><div class="allerg-desc" data-it>Sedano e prodotti a base di sedano.</div><div class="allerg-desc" data-en>Celery and celery-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🟡</div><div><div class="allerg-name"><span data-it>Senape</span><span data-en>Mustard</span></div><div class="allerg-desc" data-it>Senape e prodotti a base di senape.</div><div class="allerg-desc" data-en>Mustard and mustard-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">⚪</div><div><div class="allerg-name"><span data-it>Sesamo</span><span data-en>Sesame</span></div><div class="allerg-desc" data-it>Semi di sesamo e prodotti a base di sesamo.</div><div class="allerg-desc" data-en>Sesame seeds and sesame-based products.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🧪</div><div><div class="allerg-name"><span data-it>Solfiti</span><span data-en>Sulphites</span></div><div class="allerg-desc" data-it>Anidride solforosa e solfiti oltre 10 mg/kg.</div><div class="allerg-desc" data-en>Sulphur dioxide and sulphites above 10 mg/kg.</div></div></div>
+  <div class="allerg-item reveal"><div class="allerg-icon">🫛</div><div><div class="allerg-name"><span data-it>Lupini</span><span data-en>Lupin</span></div><div class="allerg-desc" data-it>Lupini e prodotti a base di lupini.</div><div class="allerg-desc" data-en>Lupin and lupin-based products.</div></div></div>
+</section>
+
+<footer class="footer reveal">
+  <div class="footer-logo">Pensiero Divino</div>
+  <div class="footer-sub">Firenze · Italia</div>
+  <div class="footer-rule"><span></span></div>
+  <div class="footer-note" data-it>Per allergeni chiedere al personale</div>
+  <div class="footer-note" data-en>For allergens please ask our staff</div>
+  <a href="https://www.instagram.com/pensierodivino_/" class="footer-ig" target="_blank">
+@pensierodivino_
+</a>
+
+<a href="https://www.pensierodivino.com" class="footer-site" target="_blank">
+www.pensierodivino.com
+</a>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 45);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Active nav
+const navLinks = document.querySelectorAll('.nav-link');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const a = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+['food','vino','drink'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) navObs.observe(el);
+});
+
+// Language switch
+function setLang(lang) {
+  document.body.className = lang;
+  document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+}
+
+// Floating menu
+const menuToggle = document.getElementById('menuToggle');
+const menuDropdown = document.getElementById('menuDropdown');
+
+menuToggle.addEventListener('click', () => {
+  menuDropdown.classList.toggle('open');
+});
+
+window.addEventListener('click', (e) => {
+  if (!e.target.closest('.floating-menu')) {
+    menuDropdown.classList.remove('open');
+  }
+});
+// Hide floating menu after hero
+const floatingMenu = document.querySelector('.floating-menu');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > window.innerHeight * 0.55) {
+    floatingMenu.classList.add('hidden');
+    menuDropdown.classList.remove('open');
+  } else {
+    floatingMenu.classList.remove('hidden');
+  }
+});
+</script>
+</body>
+</html>

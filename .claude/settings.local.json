@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/Users/michelegeda/Library/Mobile Documents/com~apple~CloudDocs/Pensiero Divino/Pensiero Divino-site/.claude\")",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
