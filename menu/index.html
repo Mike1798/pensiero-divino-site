@@ -219,6 +219,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .item:last-child{border-bottom:1px solid var(--border);}
 .item-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
 .item-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;letter-spacing:-.01em;color:var(--ink);}
+.badge-veg{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:400;font-style:italic;color:#4a7c4e;vertical-align:middle;margin-left:7px;opacity:0.85;}
+.badge-gf{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:400;font-style:italic;color:#3a7c72;vertical-align:middle;margin-left:7px;opacity:0.85;}
 .item-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--wine);white-space:nowrap;flex-shrink:0;}
 .item-abv{font-size:.68rem;letter-spacing:.1em;color:var(--gold);white-space:nowrap;flex-shrink:0;}
 .item-desc{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.82rem;color:var(--ink-soft);line-height:1.65;margin-top:7px;border-left:2px solid var(--gold-line);padding-left:12px;}
@@ -362,6 +364,13 @@ body.en [data-en]{display:revert;}
       </svg>
       <span data-it>Vino</span><span data-en>Wine</span>
     </a>
+    <a href="#birre" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2h10l1 15a2 2 0 01-2 2H7a2 2 0 01-2-2L6 2z"/>
+        <path d="M16 7h2a2 2 0 010 5h-2"/>
+      </svg>
+      <span data-it>Birra</span><span data-en>Beer</span>
+    </a>
     <a href="#drink" class="nav-link">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M8 22h8M9 3h6l3 7H6l3-7zM6 10c0 3.314 2.686 6 6 6s6-2.686 6-6"/>
@@ -401,14 +410,14 @@ body.en [data-en]{display:revert;}
   </div>
 
   <div class="item reveal">
-    <div class="item-row"><div class="item-name">La Gino</div><div class="item-price">€7</div></div>
+    <div class="item-row"><div class="item-name">Gino</div><div class="item-price">€7</div></div>
     <div class="item-desc" data-it>Lardo, brie, miele</div>
     <div class="item-desc" data-en>Lard, brie, honey</div>
     <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
   </div>
 
   <div class="item reveal">
-    <div class="item-row"><div class="item-name">La Caterina</div><div class="item-price">€7</div></div>
+    <div class="item-row"><div class="item-name">Caterina</div><div class="item-price">€7</div></div>
     <div class="item-desc" data-it>Cotto, brie, miele, noci, rucola</div>
     <div class="item-desc" data-en>Cooked ham, brie, honey, walnuts, rocket</div>
     <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span><span class="ap"><span>🌰</span></span></div>
@@ -422,14 +431,14 @@ body.en [data-en]{display:revert;}
   </div>
 
   <div class="item reveal">
-    <div class="item-row"><div class="item-name">Contadina</div><div class="item-price">€7</div></div>
+    <div class="item-row"><div class="item-name">Contadina <span class="badge-veg" data-it>vegetariano</span><span class="badge-veg" data-en>vegetarian</span></div><div class="item-price">€7</div></div>
     <div class="item-desc" data-it>Pecorino, miele, noci e rucola</div>
     <div class="item-desc" data-en>Pecorino, honey, walnuts and rocket</div>
     <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span><span class="ap"><span>🌰</span></span></div>
   </div>
 
   <div class="item reveal">
-    <div class="item-row"><div class="item-name">Fresca</div><div class="item-price">€7</div></div>
+    <div class="item-row"><div class="item-name">Fresca <span class="badge-veg" data-it>vegetariano</span><span class="badge-veg" data-en>vegetarian</span></div><div class="item-price">€7</div></div>
     <div class="item-desc" data-it>Stracciatella, pomodoro e insalata</div>
     <div class="item-desc" data-en>Stracciatella, tomato and salad</div>
     <div class="allergen-pills"><span class="ap"><span>🌾</span></span><span class="ap"><span>🥛</span></span></div>
@@ -537,10 +546,33 @@ body.en [data-en]{display:revert;}
   <div class="item reveal"><div class="item-row"><div class="item-name">Raboso</div><div class="item-abv">11% vol</div></div><div class="item-desc" data-it>Rosato frizzante dal Veneto, fresco e fruttato.</div><div class="item-desc" data-en>Veneto sparkling rosé, fresh and fruity.</div></div>
 </section>
 
+<!-- BIRRE -->
+<section class="section reveal" id="birre">
+  <div class="sec-head">
+    <span class="sec-tag">03 — <span data-it>Birrificio</span><span data-en>Brewery</span></span>
+    <h2 class="sec-title"><em><span data-it>Birra Artigianale</span><span data-en>Craft Beer</span></em></h2>
+    <div class="sec-rule"><span></span></div>
+  </div>
+
+  <div class="sub-cat sub-cat-first">Brenta Brau · 50 cl</div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Helles</div><div class="item-price">€6</div></div><div class="item-desc" data-it>Bionda</div><div class="item-desc" data-en>Pale Lager</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Vienna</div><div class="item-price">€6</div></div><div class="item-desc" data-it>Rossa</div><div class="item-desc" data-en>Red Lager</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Weizen</div><div class="item-price">€6</div></div><div class="item-desc" data-it>Weisse</div><div class="item-desc" data-en>Wheat Beer</div></div>
+
+  <div class="sub-cat">Birra Flea · 33 cl</div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Costanza</div><div class="item-price">€5</div></div><div class="item-desc">Blonde Ale</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Bianca Lancia</div><div class="item-price">€5</div></div><div class="item-desc">Blanche</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Federico II</div><div class="item-price">€5</div></div><div class="item-desc">Golden Ale</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Federico II Extra</div><div class="item-price">€5</div></div><div class="item-desc">IPA</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Bastola</div><div class="item-price">€5</div></div><div class="item-desc">Imperial Red</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Anais</div><div class="item-price">€5</div></div><div class="item-desc">Smoked</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Isabella <span class="badge-gf" data-it>senza glutine</span><span class="badge-gf" data-en>gluten free</span></div><div class="item-price">€5</div></div><div class="item-desc">Gluten Free</div></div>
+</section>
+
 <!-- DRINK -->
 <section class="section reveal" id="drink">
   <div class="sec-head">
-    <span class="sec-tag">03 — Bar</span>
+    <span class="sec-tag">04 — Bar</span>
     <h2 class="sec-title"><em>Drink</em></h2>
     <div class="sec-rule"><span></span></div>
   </div>
@@ -567,7 +599,7 @@ body.en [data-en]{display:revert;}
   <div class="item reveal"><div class="item-row"><div class="item-name"><span data-it>Cocktail Analcolico</span><span data-en>Mocktail</span></div><div class="item-price">€5</div></div><div class="item-desc">Lime · <span data-it>Sciroppo alla Fragola · Succo d'arancia</span><span data-en>Strawberry syrup · Orange juice</span></div></div>
   <div class="item reveal"><div class="item-row"><div class="item-name">Virgin Mojito</div><div class="item-price">€6</div></div><div class="item-desc">Lime · <span data-it>Zucchero di canna · Menta · Soda</span><span data-en>Cane sugar · Mint · Soda</span></div></div>
   <div class="item reveal"><div class="item-row"><div class="item-name">Crodino</div><div class="item-price">€4</div></div></div>
-  <div class="item reveal"><div class="item-row"><div class="item-name">Coca Cola</div><div class="item-price">€2,50</div></div><div class="item-desc">Normale / Zero</div></div>
+  <div class="item reveal"><div class="item-row"><div class="item-name">Coca Cola</div><div class="item-price">€2,50</div></div><div class="item-desc" data-it>Normale / Zero</div><div class="item-desc" data-en>Regular / Zero</div></div>
   <div class="item reveal"><div class="item-row"><div class="item-name">Esta Thè</div><div class="item-price">€1,50</div></div><div class="item-desc"><span data-it>Limone / Pesca</span><span data-en>Lemon / Peach</span></div></div>
   <div class="item reveal"><div class="item-row"><div class="item-name"><span data-it>Acqua 0,50cl</span><span data-en>Water 0,50cl</span></div><div class="item-price">€1</div></div><div class="item-desc"><span data-it>Gassata / Naturale</span><span data-en>Sparkling / Still</span></div></div>
 </section>

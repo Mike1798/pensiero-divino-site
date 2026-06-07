@@ -309,12 +309,6 @@ body {
   overflow: hidden;
 }
 
-a.experience-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
 .experience-card img {
   width: 100%;
   height: 100%;
@@ -326,22 +320,6 @@ a.experience-card {
 
 .experience-card:hover img {
   transform: scale(1.05);
-}
-
-.experience-overlay::after {
-  content: '→';
-  position: absolute;
-  bottom: 35px;
-  right: 35px;
-  font-size: 16px;
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.experience-card:hover .experience-overlay::after {
-  opacity: 0.65;
-  transform: translateX(0);
 }
 
 .experience-overlay {
@@ -359,7 +337,29 @@ a.experience-card {
   flex-direction: column;
   justify-content: flex-end;
 
-  padding: 35px;
+  padding: 28px 28px 28px 35px;
+}
+
+.experience-btn {
+  align-self: flex-end;
+  margin-top: 16px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.07);
+  color: white;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s, border-color 0.3s;
+  white-space: nowrap;
+}
+
+.experience-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.7);
 }
 
 .experience-overlay h3 {
@@ -2364,21 +2364,23 @@ a.experience-card {
 }
 
 .about-cta-link {
-  padding: 16px 38px;
+  display: inline-block;
+  padding: 15px 36px;
   border: 1px solid rgba(255,255,255,0.22);
-  background: rgba(255,255,255,0.04);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
   color: white;
   text-decoration: none;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  backdrop-filter: blur(8px);
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .about-cta-link:hover {
-  background: white;
-  color: black;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.55);
+  color: white;
 }
 
 @media(max-width: 768px) {
@@ -2868,19 +2870,22 @@ a.experience-card {
 .location-cta {
   display: inline-block;
   margin-top: 44px;
-  padding: 15px 34px;
-  border: 1px solid rgba(255,255,255,0.3);
+  padding: 15px 36px;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
   color: white;
   text-decoration: none;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .location-cta:hover {
-  background: white;
-  color: black;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.55);
+  color: white;
 }
 
 .location-map iframe {
