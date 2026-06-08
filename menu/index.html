@@ -668,7 +668,7 @@ const navObs = new IntersectionObserver((entries) => {
     }
   });
 }, { rootMargin: '-30% 0px -60% 0px' });
-['food','vino','drink'].forEach(id => {
+['food','vino','birre','drink'].forEach(id => {
   const el = document.getElementById(id);
   if (el) navObs.observe(el);
 });
@@ -694,17 +694,26 @@ window.addEventListener('click', (e) => {
     menuDropdown.classList.remove('open');
   }
 });
-// Hide floating menu after hero
+// Hide floating menu after hero — passivo e throttlato con rAF (scroll più fluido)
 const floatingMenu = document.querySelector('.floating-menu');
+let floatingMenuTicking = false;
 
-window.addEventListener('scroll', () => {
+function updateFloatingMenu() {
   if (window.scrollY > window.innerHeight * 0.55) {
     floatingMenu.classList.add('hidden');
     menuDropdown.classList.remove('open');
   } else {
     floatingMenu.classList.remove('hidden');
   }
-});
+  floatingMenuTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!floatingMenuTicking) {
+    floatingMenuTicking = true;
+    requestAnimationFrame(updateFloatingMenu);
+  }
+}, { passive: true });
 </script>
 </body>
 </html>

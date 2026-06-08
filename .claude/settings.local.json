@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(mkdir -p \"/Users/michelegeda/Library/Mobile Documents/com~apple~CloudDocs/Pensiero Divino/Pensiero Divino-site/.claude\")",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 -c \"import sys; print\\(sys.path\\)\")",
+      "Bash(pip3 show *)",
+      "Bash(convert -version)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"from PIL import Image; print\\('ok'\\)\")",
+      "Bash(python3 -)",
+      "Bash(rm -rf /tmp/crop_test /tmp/crop_test2 && echo \"cleaned up\")"
     ]
   }
 }

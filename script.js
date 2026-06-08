@@ -56,27 +56,23 @@ document.addEventListener('click', (e) => {
   smoothScrollTo(targetY, 900);
 });
 
+// Reveal al scroll — IntersectionObserver invece di un listener su 'scroll':
+// evita di forzare un reflow (getBoundingClientRect) su ogni elemento ad ogni
+// frame di scroll, che è la causa più comune di "scatti" durante lo scorrimento.
 const reveals = document.querySelectorAll('.reveal');
 
-window.addEventListener('scroll', revealSections);
+if (reveals.length) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -15% 0px' });
 
-function revealSections() {
-
-  const triggerBottom = window.innerHeight * 0.85;
-
-  reveals.forEach(section => {
-
-    const sectionTop = section.getBoundingClientRect().top;
-
-    if(sectionTop < triggerBottom) {
-      section.classList.add('active');
-    }
-
-  });
-
+  reveals.forEach(section => revealObserver.observe(section));
 }
-
-revealSections();
 
 // Hamburger menu
 const hamburger = document.getElementById('hamburger');
@@ -91,25 +87,10 @@ if (hamburger && mobileNav) {
   });
 }
 
-// Navbar scroll transition
-const navbar = document.getElementById('navbar');
-if (navbar) {
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  });
-}
-
 // Carousel — bottoni + auto-scroll
 const carouselTrack = document.querySelector('.carousel-track');
 if (carouselTrack) {
   const scrollAmount = 450;
-
-  document.querySelector('.carousel-btn.right')?.addEventListener('click', () => {
-    carouselTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  });
-  document.querySelector('.carousel-btn.left')?.addEventListener('click', () => {
-    carouselTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-  });
 
   function startAutoScroll() {
     return setInterval(() => {
@@ -123,18 +104,60 @@ if (carouselTrack) {
   }
 
   let autoScroll = startAutoScroll();
+  let resumeTimer = null;
 
-  carouselTrack.addEventListener('mouseenter', () => clearInterval(autoScroll));
+  // Ferma lo scorrimento automatico; se resumeDelay è impostato, lo riattiva
+  // dopo quel tempo di inattività (così chi naviga con le frecce può
+  // soffermarsi su una foto senza che continui a scorrere da sola).
+  function pauseAutoScroll(resumeDelay = 0) {
+    clearInterval(autoScroll);
+    clearTimeout(resumeTimer);
+    if (resumeDelay) {
+      resumeTimer = setTimeout(() => { autoScroll = startAutoScroll(); }, resumeDelay);
+    }
+  }
+
+  document.querySelector('.carousel-btn.right')?.addEventListener('click', () => {
+    pauseAutoScroll(6000);
+    carouselTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+  document.querySelector('.carousel-btn.left')?.addEventListener('click', () => {
+    pauseAutoScroll(6000);
+    carouselTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  carouselTrack.addEventListener('mouseenter', () => pauseAutoScroll());
   carouselTrack.addEventListener('mouseleave', () => { autoScroll = startAutoScroll(); });
-  carouselTrack.addEventListener('touchstart', () => clearInterval(autoScroll), { passive: true });
+  carouselTrack.addEventListener('touchstart', () => pauseAutoScroll(8000), { passive: true });
 }
 
-// Back to top
+// Navbar "scrolled" + Back to top — un solo listener su 'scroll', passivo e
+// "throttlato" con requestAnimationFrame: niente lavoro extra ad ogni singolo
+// evento, allineato al refresh dello schermo, scroll più fluido (no scatti).
+const navbar = document.getElementById('navbar');
 const backToTop = document.getElementById('backToTop');
-if (backToTop) {
+
+if (navbar || backToTop) {
+  let scrollTicking = false;
+
+  const updateScrollUI = () => {
+    const y = window.scrollY;
+    if (navbar) navbar.classList.toggle('scrolled', y > 60);
+    if (backToTop) backToTop.classList.toggle('visible', y > 400);
+    scrollTicking = false;
+  };
+
   window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('visible', window.scrollY > 400);
-  });
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(updateScrollUI);
+    }
+  }, { passive: true });
+
+  updateScrollUI();
+}
+
+if (backToTop) {
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
