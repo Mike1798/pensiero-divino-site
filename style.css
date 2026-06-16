@@ -110,6 +110,16 @@ body {
   opacity: 0.7;
 }
 
+.navbar nav a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.7);
+}
+
 .navbar nav a.active {
   opacity: 1;
 }
@@ -2426,12 +2436,22 @@ body {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
-
+  position: relative;
   transition: 0.3s;
 }
 
 .about-navbar nav a:hover {
   opacity: 0.7;
+}
+
+.about-navbar nav a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.7);
 }
 /* ABOUT FOOTER */
 
