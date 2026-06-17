@@ -1,3 +1,17 @@
+// Video autoplay recovery — iOS/Android bloccano l'autoplay quando la tab
+// è in background, la modalità risparmio energetico è attiva o l'utente
+// torna su questa pagina via bfcache. Riproviamo il play per garantire
+// che i video hero girino sempre in loop senza mostrare il tasto play.
+document.querySelectorAll('video[autoplay]').forEach(video => {
+  video.play().catch(() => {});
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && video.paused && !video.ended) video.play().catch(() => {});
+  });
+  window.addEventListener('pageshow', e => {
+    if (e.persisted && video.paused && !video.ended) video.play().catch(() => {});
+  });
+});
+
 // Carica Google Maps solo al click (GDPR / cookie terze parti)
 function loadMap(btn) {
   const placeholder = btn.closest('.map-placeholder');

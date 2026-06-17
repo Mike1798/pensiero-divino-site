@@ -482,8 +482,6 @@ body {
 
   scroll-snap-type: x mandatory;
 
-  scroll-behavior: smooth;
-
   scrollbar-width: none;
 }
 
@@ -515,17 +513,14 @@ body {
 }
 
 .carousel-track img:hover {
-  transform: scale(1.045) translateY(-10px);
-
+  /* L'animazione usa `translate` (proprietà separata), così `transform`
+     qui non viene sovrascritto dall'@keyframes e lo scale funziona. */
+  transform: scale(1.045);
+  translate: 0 -10px;
   filter: brightness(1);
+  animation-play-state: paused;
 }
 /* CAROUSEL CONTROLS */
-
-
-
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
 
 .carousel-btn {
   position: absolute;
@@ -599,17 +594,9 @@ body {
 }
 @keyframes floatingImage {
 
-  0% {
-    transform: translateY(0px);  
-  }
+  0%, 100% { translate: 0 0px; }
 
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
+  50%       { translate: 0 -10px; }
 
 }
 /* INSTAGRAM SECTION */
